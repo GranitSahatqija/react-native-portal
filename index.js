@@ -30,11 +30,11 @@ export class PortalProvider extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this._emitter = new mitt();
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this._emitter = null;
   }
 
@@ -81,7 +81,7 @@ export class BlackPortal extends React.PureComponent {
     const { portalSet } = this.context;
     portalSet && portalSet(name, children);
   }
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     const oldProps = this.props;
     const { name, children } = newProps;
     const { portalSet } = this.context;
@@ -89,7 +89,7 @@ export class BlackPortal extends React.PureComponent {
       portalSet && portalSet(name, children);
     }
   }
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     const { name } = this.props;
     const { portalSet } = this.context;
     portalSet && portalSet(name, null);
@@ -107,12 +107,12 @@ export class WhitePortal extends React.PureComponent {
     children?: *,
     childrenProps?: *,
   };
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const { name } = this.props;
     const { portalSub } = this.context;
     portalSub && portalSub(name, this.forceUpdater);
   }
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     const { name } = this.props;
     const { portalUnsub } = this.context;
     portalUnsub && portalUnsub(name, this.forceUpdater);
